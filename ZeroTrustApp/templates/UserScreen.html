@@ -1,0 +1,108 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<title>Blockchain Based ZTNA System</title>
+
+	<meta charset="utf-8">
+
+	<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+
+	<style>
+		.subtitle {
+			font-size: 16px;
+			color: #444;
+			text-align: center;
+			margin-top: 10px;
+		}
+
+		.dashboard-text {
+			margin-top: 40px;
+			font-size: 16px;
+			text-align: center;
+			color: #333;
+			line-height: 1.6;
+		}
+
+		.result {
+			margin-top: 30px;
+			text-align: center;
+			font-size: 16px;
+			color: #333;
+		}
+
+		footer {
+			margin-top: 50px;
+			text-align: center;
+			font-size: 14px;
+			color: #555;
+			padding-bottom: 10px;
+		}
+	</style>
+
+</head>
+
+<body>
+
+	<div id="wrapper">
+
+		<header id="header">
+			<h1>Blockchain Based ZTNA System</h1>
+		</header>
+
+		<div class="result">
+			<b>{{ data|safe }}</b>
+		</div>
+
+		<nav id="menu">
+			<ul>
+		
+				<li><a href="{% url 'UploadFile' %}" class="nav-link">Save Data</a></li>
+		
+				<li><a href="{% url 'AccessData' %}" class="nav-link">Access Data</a></li>
+		
+				<li><a href="{% url 'ViewActivities' %}" class="nav-link">Activities</a></li>
+		
+				<li><a href="{% url 'index' %}" class="nav-link">Logout</a></li>
+		
+			</ul>
+		</nav>
+
+		<section id="dashboard">
+
+			<h2 style="text-align:center;">Secure Access Dashboard</h2>
+
+			<p class="subtitle">
+				Welcome to the Blockchain Enabled Zero Trust Access Control System
+			</p>
+
+			
+
+		</section>
+
+		
+
+		<script>
+
+			const links = document.querySelectorAll(".nav-link");
+			const currentUrl = window.location.href;
+
+			links.forEach(link => {
+				if (currentUrl.includes(link.getAttribute("href"))) {
+					link.classList.add("active-nav");
+				}
+			});
+
+		</script>
+
+		<footer>
+			Blockchain Based ZTNA System | Secure Access Control using Blockchain
+		</footer>
+
+	</div>
+
+</body>
+
+</html>

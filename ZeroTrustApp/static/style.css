@@ -1,0 +1,166 @@
+{
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+
+	/* Body */
+
+	body {
+		font-family: 'Segoe UI', Tahoma, sans-serif;
+		background: #eef3f7;
+	}
+
+	/* Wrapper */
+
+	#wrapper {
+		width: 900px;
+		margin: 60px auto;
+		background: #e8f0fe;
+		/* changed container background */
+		border-radius: 8px;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+		overflow: hidden;
+	}
+
+	/* Header */
+
+	#header {
+		background: #4a6fa5;
+		padding: 25px;
+		text-align: center;
+	}
+
+	#header h1 {
+		color: white;
+		font-size: 28px;
+		letter-spacing: 1px;
+	}
+
+	/* Menu Buttons */
+
+	#menu {
+		text-align: center;
+		padding: 25px;
+	}
+
+	#menu ul {
+		list-style: none;
+	}
+
+	#menu ul li {
+		display: inline-block;
+		margin: 10px;
+	}
+
+	#menu ul li a {
+		text-decoration: none;
+		padding: 12px 25px;
+		background: #a8dadc;
+		/* light button color */
+		color: #1d3557;
+		border-radius: 6px;
+		font-size: 16px;
+		transition: 0.3s;
+	}
+
+	#menu ul li a:hover {
+		background: #90c2d1;
+	}
+
+	/* Home Content */
+
+	#home {
+		padding: 40px;
+		text-align: center;
+	}
+
+	#home h2 {
+		font-size: 26px;
+		color: #1f3c4d;
+		margin-bottom: 20px;
+	}
+
+	#home p {
+		font-size: 16px;
+		color: #333;
+		line-height: 1.7;
+		width: 75%;
+		margin: auto;
+	}
+
+/* Feature Section */
+
+#features {
+	display: flex;
+	justify-content: space-around;
+	padding: 40px 60px 60px 60px;
+}
+
+.feature-box {
+	background: #f7f9fb;
+	padding: 25px;
+	width: 30%;
+	border-radius: 8px;
+	text-align: center;
+	transition: 0.3s;
+}
+
+.feature-box:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.feature-box h3 {
+	color: #2c5364;
+	margin-bottom: 10px;
+}
+
+.feature-box p {
+	color: #555;
+	font-size: 15px;
+}
+
+#menu ul {
+	list-style: none;
+	text-align: center;
+	padding: 20px;
+}
+
+#menu ul li {
+	display: inline-block;
+	margin: 10px;
+}
+
+#menu ul li a {
+	padding: 10px 20px;
+	background: #9cc3c7;
+	border-radius: 6px;
+	text-decoration: none;
+	color: #083c5a;
+	font-weight: 500;
+	transition: 0.3s;
+}
+
+
+
+#menu ul li a:hover {
+	background: #7fb3b8;
+
+}
+
+
+.active-nav {
+	background: #0d47a1 !important;
+	color: white !important;
+}
+
+/* Footer */
+
+#footer {
+	text-align: center;
+	padding: 20px;
+	border-top: 1px solid #eee;
+	color: #777;
+	font-size: 14px;
+}

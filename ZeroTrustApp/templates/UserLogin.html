@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<title>Blockchain Based ZTNA System</title>
+	<meta charset="utf-8">
+
+	<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+
+	<script>
+
+		function validate() {
+
+			var x = document.forms["f1"]["username"].value;
+			var y = document.forms["f1"]["password"].value;
+
+			if (x == null || x == "") {
+				alert("Username must be entered");
+				document.f1.username.focus();
+				return false;
+			}
+
+			if (y == null || y == "") {
+				alert("Password must be entered");
+				document.f1.password.focus();
+				return false;
+			}
+
+			return true;
+		}
+
+	</script>
+
+</head>
+
+<body>
+
+	<div id="wrapper">
+
+		<div id="header">
+			<h1>Blockchain Based ZTNA System</h1>
+		</div>
+
+		<section id="home">
+
+			<h2>User Login</h2>
+
+			<font color="black">
+				<center>{{ data }}</center>
+			</font>
+
+			<br>
+
+			<form name="f1" method="post" action="{% url 'UserLoginAction' %}" onsubmit="return validate()">
+				{% csrf_token %}
+
+				<table align="center" cellpadding="10">
+
+					<tr>
+						<td>Username</td>
+						<td><input type="text" name="username" size="25"></td>
+					</tr>
+
+					<tr>
+						<td>Password</td>
+						<td><input type="password" name="password" size="25"></td>
+					</tr>
+
+					<tr>
+						<td></td>
+						<td>
+							<input type="submit" value="Login" class="btn">
+						</td>
+					</tr>
+
+				</table>
+
+			</form>
+
+			<br><br>
+
+			<!-- Back Arrow Bottom Right -->
+			<div style="text-align:right; margin-top:30px;">
+				<a href="{% url 'index' %}" style="text-decoration:none; font-size:18px;">
+					← Home
+				</a>
+			</div>
+
+		</section>
+
+		<footer id="footer">
+			<p>Blockchain Based ZTNA System | Secure Access Control</p>
+		</footer>
+
+	</div>
+
+</body>
+
+</html>

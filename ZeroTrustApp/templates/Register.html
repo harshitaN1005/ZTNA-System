@@ -1,0 +1,147 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<title>Blockchain Based ZTNA System</title>
+	<meta charset="utf-8">
+
+	<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+
+	<script>
+
+		function checkEmail(t3) {
+			if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(t3)) {
+				return true;
+			}
+			alert("Invalid E-mail Address!");
+			return false;
+		}
+
+		function validate() {
+
+			var x = document.forms["f1"]["t1"].value;
+			var y = document.forms["f1"]["t2"].value;
+			var contact = document.forms["f1"]["t3"].value;
+			var email = document.forms["f1"]["t4"].value;
+			var address = document.forms["f1"]["t5"].value;
+
+			if (x == "") {
+				alert("Username must be entered");
+				return false;
+			}
+
+			if (y == "") {
+				alert("Password must be entered");
+				return false;
+			}
+
+			if (contact == "") {
+				alert("Enter contact number");
+				return false;
+			}
+
+			if (isNaN(contact)) {
+				alert("Contact must be numeric");
+				return false;
+			}
+
+			if (contact.length != 10) {
+				alert("Contact must be 10 digits");
+				return false;
+			}
+
+			if (email == "") {
+				alert("Enter email");
+				return false;
+			}
+
+			if (!checkEmail(email)) {
+				return false;
+			}
+
+			if (address == "") {
+				alert("Enter address");
+				return false;
+			}
+
+			return true;
+		}
+
+	</script>
+
+</head>
+
+<body>
+
+	<div id="wrapper">
+
+		<div id="header">
+			<h1>Blockchain Based ZTNA System</h1>
+		</div>
+
+		<section id="home">
+
+			<h2>User Registration</h2>
+
+			{{ data|safe }}
+
+			<br><br>
+
+			<form name="f1" method="post" action="{% url 'RegisterAction' %}" onsubmit="return validate()">
+				{% csrf_token %}
+
+				<table align="center" cellpadding="10">
+
+					<tr>
+						<td>Username</td>
+						<td><input type="text" name="t1"></td>
+					</tr>
+
+					<tr>
+						<td>Password</td>
+						<td><input type="password" name="t2"></td>
+					</tr>
+
+					<tr>
+						<td>Contact No</td>
+						<td><input type="text" name="t3"></td>
+					</tr>
+
+					<tr>
+						<td>Email ID</td>
+						<td><input type="text" name="t4"></td>
+					</tr>
+
+					<tr>
+						<td>Address</td>
+						<td><input type="text" name="t5"></td>
+					</tr>
+
+					<tr>
+						<td></td>
+						<td><input type="submit" value="Register" class="btn"></td>
+					</tr>
+
+				</table>
+
+			</form>
+
+			<div style="text-align:right; margin-top:30px;">
+				<a href="{% url 'index' %}" style="text-decoration:none; font-size:18px;">
+					← Home
+				</a>
+			</div>
+
+		</section>
+
+		<footer id="footer">
+			<p>Blockchain Based ZTNA System</p>
+		</footer>
+
+	</div>
+
+</body>
+
+</html>

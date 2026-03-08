@@ -1,0 +1,152 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<title>Blockchain Based ZTNA System</title>
+
+	<meta charset="utf-8">
+
+	<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+
+	<script>
+
+		function validate() {
+
+			var x = document.forms["f1"]["t1"].value;
+
+			if (x == null || x == "") {
+				alert("Please upload a file");
+				document.f1.t1.focus();
+				return false;
+			}
+
+			return true;
+		}
+
+	</script>
+
+	<style>
+		#menu ul li.active a {
+			background: #0b3d91;
+			color: white;
+			border-radius: 4px;
+			padding: 6px 12px;
+		}
+
+		.upload-form {
+			margin-top: 30px;
+			text-align: center;
+		}
+
+		.upload-table {
+			margin: auto;
+			padding: 20px;
+		}
+
+		.upload-table td {
+			padding: 10px;
+			font-size: 15px;
+		}
+
+		.btn {
+			padding: 8px 16px;
+			background: #4CAF50;
+			color: white;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+		}
+
+		.btn:hover {
+			background: #388E3C;
+		}
+
+		.result {
+			text-align: center;
+			margin-top: 20px;
+			font-size: 16px;
+		}
+
+		footer {
+			margin-top: 40px;
+			text-align: center;
+			font-size: 14px;
+			color: #555;
+		}
+	</style>
+
+</head>
+
+<body>
+
+	<div id="wrapper">
+
+		<header id="header">
+			<h1>Blockchain Based ZTNA System</h1>
+		</header>
+
+		<nav id="menu">
+			<ul>
+				<li class="active"><a href="{% url 'UploadFile' %}">Save Data</a></li>
+				<li><a href="{% url 'AccessData' %}">Access Data</a></li>
+				<li><a href="{% url 'ViewActivities' %}">Activities</a></li>
+				<li><a href="{% url 'index' %}">Logout</a></li>
+			</ul>
+		</nav>
+
+		<section id="upload">
+
+			<h2 style="text-align:center;">Upload Data to Blockchain</h2>
+
+			<div class="result">
+				{{ data|safe }}
+			</div>
+
+			<form name="f1" method="post" action="{% url 'UploadFileAction' %}" enctype="multipart/form-data"
+				onsubmit="return validate()" class="upload-form">
+
+				{% csrf_token %}
+
+				<table class="upload-table">
+
+					{{ data1|safe }}
+
+					<tr>
+						<td><b>Select File</b></td>
+						<td><input type="file" name="t1"></td>
+					</tr>
+
+					<tr>
+						<td><b>Access Role</b></td>
+						<td>
+							<select name="t2">
+								<option value="Public">Public</option>
+								<option value="Private">Private</option>
+							</select>
+						</td>
+					</tr>
+
+					<tr>
+						<td></td>
+						<td>
+							<input type="submit" value="Upload" class="btn">
+						</td>
+					</tr>
+
+				</table>
+
+			</form>
+
+		</section>
+
+		<footer>
+			Blockchain Based ZTNA System | Secure Data Storage using Blockchain
+		</footer>
+
+	</div>
+
+</body>
+
+</html>
