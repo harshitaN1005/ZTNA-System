@@ -4,43 +4,85 @@
 
 <head>
 
-	<title>Blockchain Based ZTNA System</title>
+	<div class="user-info">
+		Welcome <b>{{ username }}</b>
+	</div>
 
+	<title>Blockchain Based ZTNA System</title>
 	<meta charset="utf-8">
 
 	<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
 
 	<style>
-		.subtitle {
+		/* Welcome Text */
+
+		.welcome {
+			text-align: center;
+			margin-top: 20px;
+		}
+
+		.welcome h2 {
+			font-size: 28px;
+			color: #1d3557;
+		}
+
+		.welcome p {
 			font-size: 16px;
 			color: #444;
-			text-align: center;
-			margin-top: 10px;
 		}
 
-		.dashboard-text {
-			margin-top: 40px;
-			font-size: 16px;
-			text-align: center;
-			color: #333;
-			line-height: 1.6;
-		}
+		/* Hero Section */
 
-		.result {
+		.hero {
+			background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+			url("{% static 'images/blockchain.jpg' %}");
+			background-size: cover;
+			background-position: center;
+			height: 340px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
+			color: white;
+			border-radius: 8px;
 			margin-top: 30px;
-			text-align: center;
-			font-size: 16px;
-			color: #333;
+			/* pushes image down */
 		}
 
-		footer {
-			margin-top: 50px;
-			text-align: center;
-			font-size: 14px;
-			color: #555;
-			padding-bottom: 10px;
+		.hero h2 {
+			font-size: 32px;
+			margin-bottom: 10px;
+		}
+
+		.hero p {
+			font-size: 16px;
+			width: 70%;
+			margin: auto;
 		}
 	</style>
+
+	<script>
+
+		/* Logout Confirmation */
+
+		function confirmLogout() {
+
+			var choice = confirm("Are you sure you want to logout?");
+
+			if (choice) {
+				window.location.href = "{% url 'index' %}";
+			}
+
+		}
+
+		/* Disable Back Button After Logout */
+
+		history.pushState(null, null, location.href);
+		window.onpopstate = function () {
+			history.go(1);
+		};
+
+	</script>
 
 </head>
 
@@ -52,56 +94,68 @@
 			<h1>Blockchain Based ZTNA System</h1>
 		</header>
 
-		<div class="result">
-			<b>{{ data|safe }}</b>
-		</div>
+		<!-- NAVBAR -->
 
 		<nav id="menu">
 			<ul>
-		
-				<li><a href="{% url 'UploadFile' %}" class="nav-link">Save Data</a></li>
-		
-				<li><a href="{% url 'AccessData' %}" class="nav-link">Access Data</a></li>
-		
-				<li><a href="{% url 'ViewActivities' %}" class="nav-link">Activities</a></li>
-		
-				<li><a href="{% url 'index' %}" class="nav-link">Logout</a></li>
-		
+
+				<li><a href="{% url 'UploadFile' %}">Save Data</a></li>
+				<li><a href="{% url 'AccessData' %}">Access Data</a></li>
+				<li><a href="{% url 'ViewActivities' %}">Activities</a></li>
+				<li><a href="#" onclick="confirmLogout()">Logout</a></li>
+
 			</ul>
 		</nav>
 
-		<section id="dashboard">
+		<section id="content">
 
-			<h2 style="text-align:center;">Secure Access Dashboard</h2>
+			<!-- WELCOME TEXT -->
 
-			<p class="subtitle">
-				Welcome to the Blockchain Enabled Zero Trust Access Control System
-			</p>
+			<div class="welcome">
+				<p>Secure Data Access Platform using Blockchain Technology</p>
+			</div>
 
-			
+			<!-- HERO IMAGE -->
+			<div style="margin-top:30px; text-align:center;">
+				{{ data|safe }}
+			</div>
+			<div class="hero">
+				<div>
+					<h2>Secure Data Access with Blockchain</h2>
+					<p>
+						Zero Trust Network Access (ZTNA) ensures secure authentication and blockchain
+						guarantees tamper-proof storage for your sensitive files.
+					</p>
+				</div>
+			</div>
 
 		</section>
 
-		
-
-		<script>
-
-			const links = document.querySelectorAll(".nav-link");
-			const currentUrl = window.location.href;
-
-			links.forEach(link => {
-				if (currentUrl.includes(link.getAttribute("href"))) {
-					link.classList.add("active-nav");
-				}
-			});
-
-		</script>
-
-		<footer>
-			Blockchain Based ZTNA System | Secure Access Control using Blockchain
+		<footer id="footer">
+			Blockchain Based ZTNA System | Secure Data Storage using Blockchain
 		</footer>
 
 	</div>
+
+	<script>
+
+		/* Navbar Highlight */
+
+		const links = document.querySelectorAll("#menu a");
+
+		links.forEach(link => {
+
+			link.addEventListener("click", function () {
+
+				links.forEach(l => l.classList.remove("active-nav"));
+
+				this.classList.add("active-nav");
+
+			});
+
+		});
+
+	</script>
 
 </body>
 

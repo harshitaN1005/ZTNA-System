@@ -9,6 +9,63 @@
 
 	<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
 
+	<style>
+		/* Welcome Section */
+
+		.welcome {
+			text-align: center;
+			padding: 40px 20px 10px 20px;
+		}
+
+		.welcome h2 {
+			font-size: 34px;
+			color: #1d3557;
+			margin-bottom: 8px;
+		}
+
+		.welcome p {
+			font-size: 18px;
+			color: #444;
+		}
+
+		/* Hero Image */
+
+		.hero {
+			width: 90%;
+			max-width: 900px;
+			height: 35vh;
+			margin: 20px auto;
+			border-radius: 10px;
+			background:url("{% static 'images/blockchain.jpg' %}");
+			background-size: cover;
+			background-position: center;
+		}
+
+		/* Button Section */
+
+		.main-buttons {
+			text-align: center;
+			padding: 25px 0 40px 0;
+		}
+
+		.main-buttons a {
+			text-decoration: none;
+			background: #a8dadc;
+			color: #1d3557;
+			padding: 14px 28px;
+			border-radius: 6px;
+			margin: 10px;
+			display: inline-block;
+			font-size: 16px;
+			font-weight: 500;
+			transition: 0.3s;
+		}
+
+		.main-buttons a:hover {
+			background: #90c2d1;
+		}
+	</style>
+
 </head>
 
 <body>
@@ -19,48 +76,31 @@
 			<h1>Blockchain Based ZTNA System</h1>
 		</div>
 
-		<nav id="menu">
-			<ul>
-				<li><a href="{% url 'index' %}">Home</a></li>
-				<li><a href="{% url 'UserLogin' %}">User Login</a></li>
-				<li><a href="{% url 'Register' %}">New User Signup</a></li>
-			</ul>
-		</nav>
+		<!-- Welcome Text -->
 
-		<section id="home">
+		<div class="welcome">
+			<h2>Welcome to Secure ZTNA System</h2>
+			<p>Blockchain Powered Secure Access Platform</p>
+		</div>
 
-			<h2>Secure Zero Trust Access Using Blockchain</h2>
+		<!-- Image -->
 
-			<p>
-				This system integrates Blockchain technology with Zero Trust Network Architecture (ZTNA)
-				to provide secure authentication, authorization, and transparent monitoring of users.
-				All access activities are securely stored in blockchain blocks to ensure tamper-proof
-				logging, transparency, and enhanced cybersecurity protection.
-			</p>
+		<div class="hero"></div>
 
-		</section>
+		<!-- Navigation Buttons -->
 
-		<section id="features">
+		<div class="main-buttons">
 
-			<div class="feature-box">
-				<h3>🔐 Secure Authentication</h3>
-				<p>Every access request is verified using Zero Trust security principles.</p>
-			</div>
+			<a href="{% url 'index' %}">Home</a>
 
-			<div class="feature-box">
-				<h3>⛓ Blockchain Storage</h3>
-				<p>Access logs and sensitive data are securely stored in blockchain blocks.</p>
-			</div>
+			<a href="{% url 'UserLogin' %}">User Login</a>
 
-			<div class="feature-box">
-				<h3>📊 Activity Monitoring</h3>
-				<p>All user actions are tracked and recorded for transparent auditing.</p>
-			</div>
+			<a href="{% url 'Register' %}">New User Signup</a>
 
-		</section>
+		</div>
 
 		<footer id="footer">
-			<p>Blockchain Based ZTNA System | Secure Access Control</p>
+			Blockchain Based ZTNA System | Secure Access Control
 		</footer>
 
 	</div>

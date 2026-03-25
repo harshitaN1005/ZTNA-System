@@ -109,7 +109,7 @@ def UploadFileAction(request):
         accessList.append([username, "File upload "+fname, upload_time])        
         status = '<font size="3" color="blue">Blockchain Data Hashcode = '+str(hashcode)+"</font><br/>"
         status += str(tx_receipt)
-        context= {'data':status}
+        context= {'data':status, 'username' : username}
         return render(request, 'UploadFile.html', context)
 
 def Download(request):
@@ -131,39 +131,63 @@ def Download(request):
 def ViewActivities(request):
     if request.method == 'GET':
         global username, accessList
-        output = '<table border=1 align=center width=100%><tr><th><font size="3" color="black">Access Username</th><th><font size="3" color="black">Activities</th>'
-        output+='<th><font size="3" color="black">Activities Date & Time</th></tr>'
-        
+
+        output = '<table border=1 align=center width=100%>'
+        output += '<tr>'
+        output += '<th><font size="3" color="black">Access Username</th>'
+        output += '<th><font size="3" color="black">Activities</th>'
+        output += '<th><font size="3" color="black">Activities Date & Time</th>'
+        output += '</tr>'
+
         for i in range(len(accessList)):
             al = accessList[i]
-            output += '<tr><td><font size="" color="black">'+str(al[0])+'</td><td><font size="" color="black">'+al[1]+'</td>'
-            output+='<td><font size="3" color="black">'+al[2]+'</td></tr>'
-        output += "</table><br/><br/><br/><br/>"    
-        context= {'data':output}
-        return render(request, 'UserScreen.html', context)      
 
+            if al[0] == username:
+                output += '<tr>'
+                output += '<td><font size="3" color="black">'+str(al[0])+'</td>'
+                output += '<td><font size="3" color="black">'+al[1]+'</td>'
+                output += '<td><font size="3" color="black">'+al[2]+'</td>'
+                output += '</tr>'
+
+        output += "</table><br/><br/><br/><br/>"
+
+        context = {'data': output, 'username': username}
+        return render(request, 'UserScreen.html', context)
 
 def AccessData(request):
     if request.method == 'GET':
         global username, verify_list, accessList
-        output = '<table border=1 align=center width=100%><tr><th><font size="3" color="black">Owner Name</th><th><font size="3" color="black">File Name</th>'
-        output+='<th><font size="3" color="black">Blockchain Verification Hash</th><th><font size="3" color="black">Access Role</th><th><font size="3" color="black">Download File</th></tr>'
-        #get list of verified users to allow access to that
+
+        output = '<table border=1 align=center width=100%>'
+        output += '<tr>'
+        output += '<th><font size="3" color="black">Owner Name</th>'
+        output += '<th><font size="3" color="black">File Name</th>'
+        output += '<th><font size="3" color="black">Download File</th>'
+        output += '</tr>'
+
         for i in range(len(verify_list)):
             vl = verify_list[i]
-            output += '<tr><td><font size="" color="black">'+str(vl[0])+'</td><td><font size="" color="black">'+vl[1]+'</td>'
-            output+='<td><font size="3" color="black">'+vl[2]+'</td><td><font size="3" color="black">'+vl[3]+'</td>'
-            #if given file has public access then allow user to download the file
+
+            output += '<tr>'
+            output += '<td>'+str(vl[0])+'</td>'
+            output += '<td>'+vl[1]+'</td>'
+
+            # Public file → anyone can download
             if vl[3] == "Public":
-                output +='<td><a href=\'Download?requester='+vl[1]+'\'><font size=3 color=green>Download</font></a></td></tr>'
-            else: #if file is private then it will restrict access to other user but its owner can acces that file
+                output += '<td><a href="Download?requester='+vl[1]+'"><font size=3 color=green>Download</font></a></td>'
+
+            # Private file → only owner can download
+            else:
                 if vl[0] == username:
-                    output +='<td><a href=\'Download?requester='+vl[1]+'\'><font size=3 color=green>Download</font></a></td></tr>'
+                    output += '<td><a href="Download?requester='+vl[1]+'"><font size=3 color=green>Download</font></a></td>'
                 else:
-                    output+='<td><font size="3" color="red">Private (Access Restricted)</td></tr>'
-        output += "</table><br/><br/><br/><br/>"   
-         
-        context= {'data':output}
+                    output += '<td><font size="3" color="red">Private (Access Restricted)</font></td>'
+
+            output += '</tr>'
+
+        output += "</table><br/><br/><br/><br/>"
+
+        context = {'data': output, 'username': username}
         return render(request, 'UserScreen.html', context)      
 
 def UploadFile(request):
@@ -232,7 +256,7 @@ def UserLoginAction(request):
             tx_receipt1 = web3.eth.waitForTransactionReceipt(msg1)
             accessList.append([username, "Login to Blockchain", upload_time])
             output = 'Welcome '+username
-            context= {'data':output}
+            context= {'data':output, 'username':username}
             return render(request, "UserScreen.html", context)
         if status == 'none':
             context= {'data':'Invalid login details'}
